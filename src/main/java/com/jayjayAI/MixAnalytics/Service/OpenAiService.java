@@ -2,7 +2,6 @@ package com.jayjayAI.MixAnalytics.Service;
 
 import com.jayjayAI.MixAnalytics.Model.InsumoModel;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
