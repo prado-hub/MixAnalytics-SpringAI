@@ -13,8 +13,8 @@ public class OpenAiService {
 
     private final ChatClient openAiChatModel;
 
-    public OpenAiService(ChatClient.Builder openAiChatModelBuider) {
-        this.openAiChatModel = openAiChatModelBuider.build();
+    public OpenAiService(ChatClient openAiChatModel) {
+        this.openAiChatModel = openAiChatModel;
     }
 
     public Mono<String> gerarReceita(List<InsumoModel> insumoModelList ){
