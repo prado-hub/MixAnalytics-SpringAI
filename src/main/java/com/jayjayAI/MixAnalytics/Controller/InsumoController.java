@@ -33,6 +33,12 @@ public class InsumoController {
          return ResponseEntity.ok(insumoList);
     }
 
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<InsumoModel> listarPorId(@PathVariable Long id){
+        InsumoModel insumoModel = insumoService.listarPorId(id);
+        return ResponseEntity.ok(insumoModel);
+    }
+
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> atualizarInsumo (@PathVariable Long id, @RequestBody InsumoModel insumoAtualizado){
             InsumoModel insumoAtualizadoConfirmado = insumoService.atualizarInsumo(id, insumoAtualizado);
