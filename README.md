@@ -23,3 +23,4 @@ Esse projeto consiste em um CRUD **(create,read,update e delete)** para realizar
 - Docker (empacotamento e execução em contêiner)
 - Swagger (documentação da aplicação)
 - H2 database (banco de dados para testes)
+- FlyWay migrations (versionamento de DB)
