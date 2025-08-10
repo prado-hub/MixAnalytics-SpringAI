@@ -18,7 +18,7 @@ Esse projeto consiste em um CRUD **(create,read,update e delete)** para realizar
 - java 21 (linguagem na qual o projeto foi desenvolvido)
 - SpringBoot (framework principal)
 - SpringAI (integração facilitada com módulos de inteligência artificial)
-- Spring Reactive Web
+- Spring Reactive Web (chamadas assincronas)
 - Spring web/Spring MVC (exposição de endpoints REST)
 - Docker (empacotamento e execução em contêiner)
 - Swagger (documentação da aplicação)
