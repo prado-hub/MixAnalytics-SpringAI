@@ -10,8 +10,8 @@ Esse projeto consiste em um CRUD **(create,read,update e delete)** para realizar
 - aprendizado com docker para empacotamento e build da aplicação, garantindo portabilidade e isolamento de ambiente.
 - criação de um CRUD para fundamentar os conceitos de API rest
 - leitura de documentação para entendimento do ecossistema implementado.
-	>Spring reactive web. (usado anteriormente também para fazermos as requisições via webClient)
-	Spring AI. (que tem suporte tanto para requisições síncronas tanto para assíncronas)
+	>Spring reactive web. 
+	Spring AI. 
 - documentação com Swagger
 
 **Tecnologias usadas:**
