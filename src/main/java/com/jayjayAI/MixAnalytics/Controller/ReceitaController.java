@@ -3,8 +3,7 @@ package com.jayjayAI.MixAnalytics.Controller;
 import com.jayjayAI.MixAnalytics.Model.InsumoModel;
 import com.jayjayAI.MixAnalytics.Service.OpenAiService;
 import com.jayjayAI.MixAnalytics.Service.InsumoService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +16,8 @@ import java.util.List;
 @RequestMapping("/receita")
 public class ReceitaController {
 
-    private InsumoService insumoService;
-    private OpenAiService openAiService;
+    private final InsumoService insumoService;
+    private final OpenAiService openAiService;
 
     public ReceitaController(OpenAiService openAiService, InsumoService insumoService) {
         this.openAiService = openAiService;
@@ -26,8 +25,8 @@ public class ReceitaController {
     }
 
     @GetMapping("/gerar")
+    @Operation(summary = "Gerar um drink",description = "geração de um drink com base em todos os insumos cadastrados")
     public Mono<ResponseEntity<String>> gerarReceita(){
-
         List<InsumoModel> insumoModelList = insumoService.listar();
         return openAiService.gerarReceita(insumoModelList)
                 .map(recipe-> ResponseEntity.ok(recipe))
