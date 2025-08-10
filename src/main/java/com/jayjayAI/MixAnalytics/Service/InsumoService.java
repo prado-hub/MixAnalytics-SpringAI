@@ -1,8 +1,8 @@
 package com.jayjayAI.MixAnalytics.Service;
 
+import com.jayjayAI.MixAnalytics.Exceptions.RecursoNaoEncontradoException;
 import com.jayjayAI.MixAnalytics.Model.InsumoModel;
 import com.jayjayAI.MixAnalytics.Repository.InsumoRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class InsumoService {
 
-    private InsumoRepository insumoRepository;
+    private final InsumoRepository insumoRepository;
 
     public InsumoService(InsumoRepository insumoRepository) {
         this.insumoRepository = insumoRepository;
@@ -25,22 +25,23 @@ public class InsumoService {
         return insumoRepository.save(insumoModel);
     }
 
-    public Optional<InsumoModel> listarPorId(long id){
-        return insumoRepository.findById(id);
+    public InsumoModel listarPorId(long id){
+        return insumoRepository.findById(id)
+                .orElseThrow(()-> new RecursoNaoEncontradoException("Produto com o ID" + id + "não encontrado"));
     }
 
     public InsumoModel atualizarInsumo(Long id, InsumoModel insumoAtualizado){
-        Optional<InsumoModel> insumoExistence = insumoRepository.findById(id);
-        if (insumoExistence.isPresent()){
-            insumoAtualizado.setId(id);
-            insumoRepository.save(insumoAtualizado);
-            return insumoAtualizado;
-        } else {
-            return null;
+        if(!insumoRepository.existsById(id)){
+            throw new RecursoNaoEncontradoException("Produto com o ID " + id + " não encontrado");
         }
+        insumoAtualizado.setId(id);
+        return insumoRepository.save(insumoAtualizado);
     }
 
     public void deletarInsumo(Long id){
+        if(!insumoRepository.existsById(id)){
+            throw new RecursoNaoEncontradoException("Produto com o ID " + id + " não encontrado");
+        }
         insumoRepository.deleteById(id);
     }
 }

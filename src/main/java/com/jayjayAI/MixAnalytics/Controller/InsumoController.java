@@ -1,5 +1,6 @@
 package com.jayjayAI.MixAnalytics.Controller;
 
+import com.jayjayAI.MixAnalytics.Exceptions.RecursoNaoEncontradoException;
 import com.jayjayAI.MixAnalytics.Model.InsumoModel;
 import com.jayjayAI.MixAnalytics.Service.InsumoService;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/insumo")
 public class InsumoController {
 
-    private InsumoService insumoService;
+    private final InsumoService insumoService;
 
     public InsumoController(InsumoService insumoService) {
         this.insumoService = insumoService;
@@ -34,19 +35,13 @@ public class InsumoController {
 
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> atualizarInsumo (@PathVariable Long id, @RequestBody InsumoModel insumoAtualizado){
-        InsumoModel insumoAtualizadoConfirmado = insumoService.atualizarInsumo(id,insumoAtualizado);
-        if(insumoAtualizadoConfirmado != null ){
+            InsumoModel insumoAtualizadoConfirmado = insumoService.atualizarInsumo(id, insumoAtualizado);
             return ResponseEntity.ok(insumoAtualizado);
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("insumo do ID " + id + " não encontrado");
-        }
     }
 
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarInsumo(@PathVariable Long id){
-        insumoService.deletarInsumo(id);
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .body("insumo deletado com sucesso");
+            insumoService.deletarInsumo(id);
+            return ResponseEntity.noContent().build();
     }
 }
